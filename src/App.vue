@@ -16,9 +16,7 @@ useHead({
 <template>
   <Suspense>
     <UApp>
-      <UMain>
-        <RouterView />
-      </UMain>
+      <RouterView />
     </UApp>
   </Suspense>
 </template>
