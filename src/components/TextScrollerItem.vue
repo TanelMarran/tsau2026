@@ -15,10 +15,10 @@ const props = defineProps<TextScrollerItemProps>()
             'is-open': props.isOpen
         }"
     >
-        <div v-show="props.isOpen" class="text-scroller-item__open">
+        <div class="text-scroller-item__open">
             <slot></slot>
         </div>
-        <div v-show="!props.isOpen" class="text-scroller-item__closed">
+        <div class="text-scroller-item__closed">
             <slot name="closed">
                 <div class="text-scroller-item__closed-icon"></div>
             </slot>
@@ -31,6 +31,25 @@ const props = defineProps<TextScrollerItemProps>()
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+.text-scroller-item__open {
+    opacity: 0;
+    position: fixed;
+
+    .text-scroller-item.is-open & {
+        opacity: 1;
+        position: static;
+    }
+}
+
+.text-scroller-item__closed {
+    opacity: 1;
+
+    .text-scroller-item.is-open & {
+        opacity: 0;
+        position: fixed;
+    }
 }
 
 .text-scroller-item__closed-icon {
