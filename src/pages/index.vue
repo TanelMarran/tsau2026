@@ -139,7 +139,9 @@ const footerData = {
             <img src="../assets/images/export/tsaukitsau10.png" alt="alt text" width="800px">
         </Parallaxer>
         <Parallaxer class="absolute left-0 right-0 bottom-0 z-[-1] -mx-8 pointer-events-none " :speed="2.5" :offset="1700 * 1.8">
-            <div class="index__water"></div>
+            <div class="index__water-wrapper">
+                <div class="index__water"></div>
+            </div>
             <div class="index__water-background"></div>
         </Parallaxer>
     </Scroller>
@@ -191,6 +193,11 @@ const footerData = {
     background-repeat: repeat-x;
 
     animation: slide 8s infinite linear;
+}
+
+.index__water-wrapper {
+    overflow: hidden;
+    width: 100%;
 }
 
 .index__water-background {
