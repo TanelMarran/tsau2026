@@ -13,6 +13,13 @@ const boundingBox = useElementBounding(refScrollTrack)
 const size = useElementSize(refScrollTrack)
 const sizeCart = useElementSize(refScrollCart)
 
+const scrollToProgress = (progress: number) => {
+  scrollTo({
+    top: (refScrollTrack.value?.offsetTop ?? 0) + size.height.value * progress,
+    behavior: 'smooth'
+  })
+}
+
 const computeScrollProgress = () => {
     if (!size.height.value || !sizeCart.height.value) {
         return 0
@@ -24,6 +31,12 @@ const computeScrollProgress = () => {
 const scrollProgress = computed<number>(computeScrollProgress)
 
 provide('scroll-progress', scrollProgress)
+
+defineExpose<{
+  scrollToProgress: (progress: number) => void
+}>({
+  scrollToProgress
+})
 </script>
 
 <template>

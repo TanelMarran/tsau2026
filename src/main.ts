@@ -13,7 +13,7 @@ const app = createApp(App)
 const head = createHead()
 const router = createRouter({
   routes,
-  history: createWebHistory()
+  history: createWebHistory('/tsau/')
 })
 
 app.use(head)

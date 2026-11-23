@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { computed, ref, useTemplateRef } from 'vue';
 import { CardTextProps } from '../components/CardText.vue';
 import TextScroller from '../components/TextScroller.vue';
 
@@ -52,7 +53,7 @@ const items: CardTextProps[] = [
         body: 'Ma ainult seda teha tahakski:'
     },
     {
-        body: 'Luua miskit, et siis see miski saaks luua mind.'
+        body: 'luua miskit,\net siis see miski saaks luua mind.'
     },
     {
         body: 'Nüüd siis ma lõpuks võtan selle julguse kokku\n ja lähen püüan teada saada,'
@@ -64,31 +65,108 @@ const items: CardTextProps[] = [
         body: 'Loodetavasti pole vastus liiga sügaval vee all.'
     },
     {
-        body: 'Aitäh teile toreda töökoha eest!'
+        body: 'Aitäh teile toreda töökoha eest!\nMa siis nüüd vapralt sukeldun.'
     },
     {
         body: 'Olete olnud parimad kolleegid,\nkeda üks poiskene soovida saab.'
     }
 ]
+const itemsAlt: CardTextProps[] = [
+    {
+        title: 'Hey!',
+        body: 'I wanted to let you know that\nmy final day at gotoAndPlay will be 19.12.2026.'
+    },
+    {
+        body: 'And DAMN, that sucks,'
+    },
+    {
+        body: 'because I really like\nthe people here!'
+    },
+    {
+        body: 'And I like to think the people here like me in kind.'
+    },
+    {
+        body: 'Nevertheless, I felt I needed a change.'
+    },
+    {
+        body: 'I am not sysiphus — I can not push a boulder up a mountain,'
+    },
+    {
+        body: 'for more than 3 years.'
+    },
+    {
+        body: 'Sysiphus did it for like, way longer.'
+    },
+    {
+        body: 'OK anyways,'
+    },
+    {
+        body: 'I\'m going to go try doing\nindie game development full time.'
+    },
+    {
+        body: 'Videogames and the art of making them\nis so important to me!'
+    },
+    {
+        body: 'And while this road is well known for being dangerous,'
+    },
+    {
+        body: 'I think it\'s still worth\ngiving an honest try going down it.'
+    },
+    {
+        body: 'Otherwise, I don\'t think\nI could even call this my'
+    },
+    {
+        body: '\"dream\".'
+    },
+    {
+        body: 'I hope I get to see some of\nyour dreams in the future too!'
+    },
+    {
+        body: 'Your animation work is wonderful,'
+    },
+    {
+        body: 'and I always enjoyed talking\nwith you whenever we got the chance.'
+    },
+    {
+        body: 'Oh also that Greek guy I mentioned to you once?'
+    },
+    {
+        body: 'That didn\'t work out,\nbut that\'s okay because his type was\nbald and old anyway.'
+    },
+    {
+        body: 'Ok but really, good luck! Stay in touch.'
+    },
+    {
+        body: 'I\'m gonna go look for some dreams now.'
+    }
+]
 
 const footerData = {
-    text: 'Selle hüvastijätu on toonud teile Tanel, kes pole enam päris see sama Tanel, kes ta oli 6 aastat tagasi. Lehe arenduseks kulus: 1 nädalavahetus, 1 telefon, 1 temust ostetud telefonistatiiv, 1 energiajook, 1 tobipaus, 2 kätt, 1 pea, 0 Claude tokenit.',
+    text: 'Selle hüvastijätu on toonud teile Tanel, kes pole enam päris see sama Tanel, kes ta oli 6 aastat tagasi. Lehe arenduseks kulus: üks nädalavahetus, üks telefon, üks temust ostetud telefonistatiiv, üks energiajook, üks tobipaus, kaks kätt, CC0 litsents ja null Claude tokenit.',
+}
+const footerDataAlt = {
+    text: 'This farewall has been brough to you by Tanel, who isn\'t quite the same Tanel he was 6 years ago. Used in the making of this page: a weekend worth of days, a phone, a TEMU tripod, a energy drink, a cig, two hands, the CC0 liscence and zero Claude tokens.',
 }
 
+const isEveridiki = ref<boolean>(false)
+
+const scrollerRef = useTemplateRef('scroller')
 
 </script>
 
 <template>
+  <LanguagePicker v-model="isEveridiki" class="z-5 relative"></LanguagePicker>
   <Scroller
     class="px-8"
+    ref="scroller"
     :height="2400 * 5"
   >
     <TextScroller
       class="index__text-scroller max-w-160 z-10"
       :visibility-range="4"
-      :items="items"
+      :items="isEveridiki ? items : itemsAlt"
     >
-      <template #item="{ open, dotScrollProgress, isScrolledPast, ...props }">
+      <template #item="{ open, dotScrollProgress, isScrolledPast, index, ...props }">
         <TextScrollerItem
           class="index__scroller-item"
           :class="{
@@ -105,6 +183,7 @@ const footerData = {
           </template>
           <template #closed>
             <ShakeyDot
+              @click="() => scrollerRef?.scrollToProgress(index / ((isEveridiki ? items : itemsAlt).length))"
               :fill-amount="(dotScrollProgress)"
             />
           </template>
@@ -112,25 +191,26 @@ const footerData = {
       </template>
     </TextScroller>
     <Parallaxer
-      class="absolute bottom-16 right-4/16 -ml-16 z-0 pointer-events-none"
-      :speed="-3.6"
-      :offset="-1900"
-    >
-      <img
-        src="../assets/images/export/arendus.JPG"
-        alt="Ma arendan"
-        :width="200"
-      >
-    </Parallaxer>
-    <Parallaxer
-      class="absolute bottom-16 right-1/16 -ml-16 z-0 pointer-events-none"
+      class="absolute bottom-16 right-0 z-0 pointer-events-none"
       :speed="3"
-      :offset="1400"
+      :offset="1300"
     >
       <img
         src="../assets/images/export/letters.jpg"
         alt="Letters past"
-        :width="600"
+        :width="450"
+      >
+    </Parallaxer>
+    <Parallaxer
+      class="absolute bottom-0 left-1/2 z-0 pointer-events-none"
+      :speed="2.1"
+      :offset="1500"
+    >
+      <img
+        class="-rotate-6"
+        src="../assets/images/export/roadsign.png"
+        alt="Letters past"
+        :width="400"
       >
     </Parallaxer>
     <Parallaxer
@@ -143,10 +223,14 @@ const footerData = {
         alt="See oli tehtud šotimaal"
         :width="400"
       >
+      <Parallaxer :speed="0.1" class="absolute top-1/3 right-0 max-w-48">
+        <mark class="index__highlight right-8 top-1/3 px-4">kuskil kaugel</mark>
+        <mark class="index__highlight right-8 top-1/3 px-4">miski põnev?</mark>
+      </Parallaxer>
     </Parallaxer>
     <Parallaxer
       class="absolute bottom-16 left-1/12 z-0 pointer-events-none"
-      :speed=".5"
+      :speed="1"
       :offset="-100"
     >
       <img
@@ -156,7 +240,7 @@ const footerData = {
       >
     </Parallaxer>
     <Parallaxer
-      class="absolute left-3/12 top-16 z-0 pointer-events-none"
+      class="absolute left-1/12 top-16 z-0 pointer-events-none"
       :speed="1"
       :offset="1000"
     >
@@ -167,14 +251,14 @@ const footerData = {
       >
     </Parallaxer>
     <Parallaxer
-      class="absolute left-2/12 top-16 z-0 pointer-events-none"
-      :speed="2"
-      :offset="1200"
+      class="absolute right-1/12 top-16 z-0 -scale-x-100 pointer-events-none"
+      :speed="3.5"
+      :offset="2300"
     >
       <img
         src="../assets/images/export/tsaukitsau4.png"
         alt="Mul on neid alt tekste veits rohkem, kui mul miskit kirjutada siia on"
-        width="200px"
+        width="100px"
       >
     </Parallaxer>
     <Parallaxer
@@ -217,18 +301,7 @@ const footerData = {
     >
       <img
         src="../assets/images/export/tsaukitsau8.png"
-        alt="Alguses mõtlesin üldse, et taust tuleb must!"
-        width="500px"
-      >
-    </Parallaxer>
-    <Parallaxer
-      class="absolute right-1/12 top-16 z-0 pointer-events-none"
-      :speed="-12"
-      :offset="-9000"
-    >
-      <img
-        src="../assets/images/export/tsaukitsau8.png"
-        alt="Aga mulle täitsa meeldib see kipitav sinine"
+        alt="Alguses mõtlesin üldse, et taust tuleb must! Aga mulle hakkas see kipitav sinine meeldima"
         width="500px"
       >
     </Parallaxer>
@@ -256,7 +329,7 @@ const footerData = {
   </Scroller>
   <Footer
     class="zindex-2 relative max-w-[480px] mx-auto"
-    v-bind="footerData"
+    v-bind="isEveridiki ? footerData : footerDataAlt"
   />
 </template>
 
@@ -316,5 +389,12 @@ const footerData = {
     width: 100%;
     height: 800px;
     background-color: #0451e0;
+}
+
+.index__highlight {
+  background-color: black;
+  color: white;
+  text-transform: uppercase;
+  font-size: 14px;
 }
 </style>

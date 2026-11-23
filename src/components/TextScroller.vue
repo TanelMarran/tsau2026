@@ -62,6 +62,7 @@ defineExpose({
         :is-scrolled-past="index < currentOpenIndex"
         :open="index == currentOpenIndex"
         :dot-scroll-progress="getLocalProgress(index - 1)"
+        :index="index"
       />
     </template>
   </div>

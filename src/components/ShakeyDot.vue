@@ -18,19 +18,24 @@ const clampedFillAmount = computed(() => Math.max(0, Math.min(1, props.fillAmoun
 const transformScale = computed(() => {
     return (1.0 - props.fillScale) + clampedFillAmount.value * props.fillScale;
 })
+
+const emit = defineEmits({
+  click: () => {}
+})
 </script>
 
 <template>
-  <div 
-    class="shakey-dot"
+  <button
+    @click="emit('click')"
+    class="shakey-dot relative z-1 cursor-pointer hover:scale-110"
   >
     <div class="shakey-dot__fill-border">
       <div
         class="shakey-dot__fill"
         :style="{ transform: `scale(1, ${transformScale})`}"
-      />
+      ></div>
     </div>
-  </div>
+  </button>
 </template>
 
 <style lang="scss">
