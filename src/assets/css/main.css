@@ -8,11 +8,14 @@
 @layer base {
   body {
     color: var(--color-red-50);
-    background-color: var(--color-slate-950);
+    background-color: #0e33da;
+    background-repeat: repeat;
+    background-size: 400%;
+    background-blend-mode: hue;
   }
 
   h1 {
-    @apply text-5xl;
+    @apply text-5xl font-bold;
   }
 
   .text-block {

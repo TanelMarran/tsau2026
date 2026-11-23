@@ -13,7 +13,7 @@ export type TextScrollerProps<TItem> = {
 }
 
 const props = withDefaults(defineProps<TextScrollerProps<TItem>>(), {
-    flickStrength: 5,
+    flickStrength: 10,
     visibilityRange: 3
 })
 
@@ -36,8 +36,8 @@ const animateFlick = (direction: 'up' | 'down') => {
     const directionSign = direction == 'up' ? 1 : -1
 
     gsap.killTweensOf('.text-scroller')
-    gsap.to('.text-scroller', { y: directionSign * props.flickStrength, duration: 0, ease: 'elastic.out'})
-    gsap.to('.text-scroller', { y: 0, duration: 1, ease: 'elastic.out'})
+    gsap.to('.text-scroller', { y: -directionSign * props.flickStrength, duration: 0, ease: 'elastic.out'})
+    gsap.to('.text-scroller', { y: 0, duration: .5, ease: 'expo.out'})
 }
 
 watch(currentOpenIndex, (value, oldValue) => {
@@ -56,7 +56,8 @@ defineExpose({
                 name="item"
                 v-bind="item"
                 :visible="Math.abs(index - currentOpenIndex) < props.visibilityRange"
-                :open="index == currentOpenIndex" 
+                :isScrolledPast="index < currentOpenIndex"
+                :open="index == currentOpenIndex"
                 :dotScrollProgress="getLocalProgress(index - 1)"
             ></slot>
         </template>
@@ -67,6 +68,6 @@ defineExpose({
 .text-scroller {
     display: flex;
     flex-direction: column;
-    gap: 16px;
+    gap: 8px;
 }
 </style>
