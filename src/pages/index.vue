@@ -79,82 +79,185 @@ const footerData = {
 </script>
 
 <template>
-    <Scroller
-        class="px-8"
-        :height="2400 * 5"
+  <Scroller
+    class="px-8"
+    :height="2400 * 5"
+  >
+    <TextScroller
+      class="index__text-scroller max-w-160 z-10"
+      :visibility-range="4"
+      :items="items"
     >
-        <TextScroller
-            class="index__text-scroller max-w-160 z-10"
-            :visibilityRange="4"
-            :items="items"
+      <template #item="{ open, dotScrollProgress, isScrolledPast, ...props }">
+        <TextScrollerItem
+          class="index__scroller-item"
+          :class="{
+            'index__scroller-item--current': open,
+            'index__scroller-item--minimized': isScrolledPast
+          }"
+          :is-open="open"
         >
-            <template #item="{ open, dotScrollProgress, visible: itemVisible, isScrolledPast, ...props }">
-                <TextScrollerItem
-                    class="index__scroller-item"
-                    :class="{
-                        'index__scroller-item--current': open,
-                        'index__scroller-item--minimized': isScrolledPast
-                    }"
-                    :isOpen="open"
-                >
-                    <template #default>
-                        <CardText
-                            v-bind="props"
-                            :class="{ 'py-4': open }"
-                        />
-                    </template>
-                    <template #closed>
-                        <ShakeyDot
-                            :fillAmount="(dotScrollProgress)"
-                        ></ShakeyDot>
-                    </template>
-                </TextScrollerItem>
-            </template>
-        </TextScroller>
-        <Parallaxer class="absolute bottom-16 right-4/16 -ml-16 z-0 pointer-events-none" :speed="-3.6" :offset="-1900">
-            <img src="../assets/images/export/arendus.JPG" alt="Ma arendan" :width="200">
-        </Parallaxer>
-        <Parallaxer class="absolute bottom-16 right-1/16 -ml-16 z-0 pointer-events-none" :speed="3" :offset="1400">
-            <img src="../assets/images/export/letters.jpg" alt="Letters past" :width="600">
-        </Parallaxer>
-        <Parallaxer class="absolute bottom-16 right-1/12 z-0 pointer-events-none" :speed="3" :offset="-100">
-            <img src="../assets/images/export/sunset.JPG" alt="See oli tehtud šotimaal" :width="400">
-        </Parallaxer>
-        <Parallaxer class="absolute bottom-16 left-1/12 z-0 pointer-events-none" :speed=".5" :offset="-100">
-            <img src="../assets/images/export/tsaukitsau2.png" alt="mulle hiljuti väga meeldinud kollaaž" width="300px">
-        </Parallaxer>
-        <Parallaxer class="absolute left-3/12 top-16 z-0 pointer-events-none" :speed="1" :offset="1000">
-            <img src="../assets/images/export/tsaukitsau3.png" alt="ja seda veebilehel kasutada oli vahva" width="300px">
-        </Parallaxer>
-        <Parallaxer class="absolute left-2/12 top-16 z-0 pointer-events-none" :speed="2" :offset="1200">
-            <img src="../assets/images/export/tsaukitsau4.png" alt="Mul on neid alt tekste veits rohkem, kui mul miskit kirjutada siia on" width="200px">
-        </Parallaxer>
-        <Parallaxer class="absolute right-1/5 top-16 z-0 pointer-events-none" :speed="-2" :offset="0">
-            <img src="../assets/images/export/tsaukitsau5.png" alt="ma suuresti sattusin selle disaini otsa kogemata" width="500px">
-        </Parallaxer>
-        <Parallaxer class="absolute right-1/12 top-16 z-0 pointer-events-none" :speed="12" :offset="4000">
-            <img src="../assets/images/export/tsaukitsau6.png" alt="Üldine mõte oli, et mida ma tahan teha," width="500px">
-        </Parallaxer>
-        <Parallaxer class="absolute right-1/12 top-16 z-0 pointer-events-none" :speed="9" :offset="4000">
-            <img src="../assets/images/export/tsaukitsau7.png" alt="ja siis nokitsesin ja suund muutus" width="500px">
-        </Parallaxer>
-        <Parallaxer class="absolute right-1/12 top-16 z-0 pointer-events-none" :speed="-9" :offset="-9000">
-            <img src="../assets/images/export/tsaukitsau8.png" alt="Alguses mõtlesin üldse, et taust tuleb must!" width="500px">
-        </Parallaxer>
-        <Parallaxer class="absolute right-1/12 top-16 z-0 pointer-events-none" :speed="-12" :offset="-9000">
-            <img src="../assets/images/export/tsaukitsau8.png" alt="Aga mulle täitsa meeldib see kipitav sinine" width="500px">
-        </Parallaxer>
-        <Parallaxer class="absolute -left-1/12 top-16 z-0 pointer-events-none" :speed="2" :offset="1500 * 1.4">
-            <img src="../assets/images/export/tsaukitsau10.png" alt="On meeldejääv:)" width="800px">
-        </Parallaxer>
-        <Parallaxer class="absolute left-0 right-0 bottom-0 z-[-1] -mx-8 pointer-events-none " :speed="2.5" :offset="1700 * 1.8">
-            <div class="index__water-wrapper">
-                <div class="index__water"></div>
-            </div>
-            <div class="index__water-background"></div>
-        </Parallaxer>
-    </Scroller>
-    <Footer class="zindex-2 relative max-w-[480px] mx-auto" v-bind="footerData"></Footer>
+          <template #default>
+            <CardText
+              v-bind="props"
+              :class="{ 'py-4': open }"
+            />
+          </template>
+          <template #closed>
+            <ShakeyDot
+              :fill-amount="(dotScrollProgress)"
+            />
+          </template>
+        </TextScrollerItem>
+      </template>
+    </TextScroller>
+    <Parallaxer
+      class="absolute bottom-16 right-4/16 -ml-16 z-0 pointer-events-none"
+      :speed="-3.6"
+      :offset="-1900"
+    >
+      <img
+        src="../assets/images/export/arendus.JPG"
+        alt="Ma arendan"
+        :width="200"
+      >
+    </Parallaxer>
+    <Parallaxer
+      class="absolute bottom-16 right-1/16 -ml-16 z-0 pointer-events-none"
+      :speed="3"
+      :offset="1400"
+    >
+      <img
+        src="../assets/images/export/letters.jpg"
+        alt="Letters past"
+        :width="600"
+      >
+    </Parallaxer>
+    <Parallaxer
+      class="absolute bottom-16 right-1/12 z-0 pointer-events-none"
+      :speed="3"
+      :offset="-100"
+    >
+      <img
+        src="../assets/images/export/sunset.JPG"
+        alt="See oli tehtud šotimaal"
+        :width="400"
+      >
+    </Parallaxer>
+    <Parallaxer
+      class="absolute bottom-16 left-1/12 z-0 pointer-events-none"
+      :speed=".5"
+      :offset="-100"
+    >
+      <img
+        src="../assets/images/export/tsaukitsau2.png"
+        alt="mulle hiljuti väga meeldinud kollaaž"
+        width="300px"
+      >
+    </Parallaxer>
+    <Parallaxer
+      class="absolute left-3/12 top-16 z-0 pointer-events-none"
+      :speed="1"
+      :offset="1000"
+    >
+      <img
+        src="../assets/images/export/tsaukitsau3.png"
+        alt="ja seda veebilehel kasutada oli vahva"
+        width="300px"
+      >
+    </Parallaxer>
+    <Parallaxer
+      class="absolute left-2/12 top-16 z-0 pointer-events-none"
+      :speed="2"
+      :offset="1200"
+    >
+      <img
+        src="../assets/images/export/tsaukitsau4.png"
+        alt="Mul on neid alt tekste veits rohkem, kui mul miskit kirjutada siia on"
+        width="200px"
+      >
+    </Parallaxer>
+    <Parallaxer
+      class="absolute right-1/5 top-16 z-0 pointer-events-none"
+      :speed="-2"
+      :offset="0"
+    >
+      <img
+        src="../assets/images/export/tsaukitsau5.png"
+        alt="ma suuresti sattusin selle disaini otsa kogemata"
+        width="500px"
+      >
+    </Parallaxer>
+    <Parallaxer
+      class="absolute right-1/12 top-16 z-0 pointer-events-none"
+      :speed="12"
+      :offset="4000"
+    >
+      <img
+        src="../assets/images/export/tsaukitsau6.png"
+        alt="Üldine mõte oli, et mida ma tahan teha,"
+        width="500px"
+      >
+    </Parallaxer>
+    <Parallaxer
+      class="absolute right-1/12 top-16 z-0 pointer-events-none"
+      :speed="9"
+      :offset="4000"
+    >
+      <img
+        src="../assets/images/export/tsaukitsau7.png"
+        alt="ja siis nokitsesin ja suund muutus"
+        width="500px"
+      >
+    </Parallaxer>
+    <Parallaxer
+      class="absolute right-1/12 top-16 z-0 pointer-events-none"
+      :speed="-9"
+      :offset="-9000"
+    >
+      <img
+        src="../assets/images/export/tsaukitsau8.png"
+        alt="Alguses mõtlesin üldse, et taust tuleb must!"
+        width="500px"
+      >
+    </Parallaxer>
+    <Parallaxer
+      class="absolute right-1/12 top-16 z-0 pointer-events-none"
+      :speed="-12"
+      :offset="-9000"
+    >
+      <img
+        src="../assets/images/export/tsaukitsau8.png"
+        alt="Aga mulle täitsa meeldib see kipitav sinine"
+        width="500px"
+      >
+    </Parallaxer>
+    <Parallaxer
+      class="absolute -left-1/12 top-16 z-0 pointer-events-none"
+      :speed="2"
+      :offset="1500 * 1.4"
+    >
+      <img
+        src="../assets/images/export/tsaukitsau10.png"
+        alt="On meeldejääv:)"
+        width="800px"
+      >
+    </Parallaxer>
+    <Parallaxer
+      class="absolute left-0 right-0 bottom-0 z-[-1] -mx-8 pointer-events-none "
+      :speed="2.5"
+      :offset="1700 * 1.8"
+    >
+      <div class="index__water-wrapper">
+        <div class="index__water" />
+      </div>
+      <div class="index__water-background" />
+    </Parallaxer>
+  </Scroller>
+  <Footer
+    class="zindex-2 relative max-w-[480px] mx-auto"
+    v-bind="footerData"
+  />
 </template>
 
 <style lang="scss">

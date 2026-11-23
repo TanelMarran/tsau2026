@@ -27,13 +27,20 @@ provide('scroll-progress', scrollProgress)
 </script>
 
 <template>
-<div class="scroller">
-    <div class="scroller__track" ref="scroll-track" :style="{ height: props.height + 'px' }">
-        <div class="scroller__cart" ref="scroll-cart">
-            <slot></slot>
-        </div>
+  <div class="scroller">
+    <div
+      ref="scroll-track"
+      class="scroller__track"
+      :style="{ height: props.height + 'px' }"
+    >
+      <div
+        ref="scroll-cart"
+        class="scroller__cart"
+      >
+        <slot />
+      </div>
     </div>
-</div>
+  </div>
 </template>
 
 <style lang="scss">

@@ -14,9 +14,5 @@ useHead({
 </script>
 
 <template>
-  <Suspense>
-    <UApp>
-      <RouterView />
-    </UApp>
-  </Suspense>
+  <RouterView />
 </template>

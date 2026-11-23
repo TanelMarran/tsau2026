@@ -50,18 +50,21 @@ defineExpose({
 </script>
 
 <template>
-    <div class="text-scroller">
-        <template v-for="(item, index) in props.items" :key="index">
-            <slot 
-                name="item"
-                v-bind="item"
-                :visible="Math.abs(index - currentOpenIndex) < props.visibilityRange"
-                :isScrolledPast="index < currentOpenIndex"
-                :open="index == currentOpenIndex"
-                :dotScrollProgress="getLocalProgress(index - 1)"
-            ></slot>
-        </template>
-    </div>
+  <div class="text-scroller">
+    <template
+      v-for="(item, index) in props.items"
+      :key="index"
+    >
+      <slot 
+        name="item"
+        v-bind="item"
+        :visible="Math.abs(index - currentOpenIndex) < props.visibilityRange"
+        :is-scrolled-past="index < currentOpenIndex"
+        :open="index == currentOpenIndex"
+        :dot-scroll-progress="getLocalProgress(index - 1)"
+      />
+    </template>
+  </div>
 </template>
 
 <style lang="scss">

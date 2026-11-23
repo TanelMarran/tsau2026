@@ -16,17 +16,5 @@ export default ts.config(
     rules: {
       'vue/multi-word-component-names': 'off'
     }
-  },
-  betterTailwindcss.configs['correctness-error'],
-  {
-    settings: {
-      'better-tailwindcss': {
-        entryPoint: 'src/assets/css/main.css',
-        attributes: [
-          ...getDefaultAttributes(),
-          ['^v-bind:ui$', [{ match: 'objectValues' }]]
-        ]
-      }
-    }
   }
 )

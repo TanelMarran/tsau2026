@@ -21,13 +21,16 @@ const transformScale = computed(() => {
 </script>
 
 <template>
-    <div 
-        class="shakey-dot"
-    >
-        <div class="shakey-dot__fill-border">
-            <div class="shakey-dot__fill" :style="{ transform: `scale(1, ${transformScale})`}"></div>
-        </div>
+  <div 
+    class="shakey-dot"
+  >
+    <div class="shakey-dot__fill-border">
+      <div
+        class="shakey-dot__fill"
+        :style="{ transform: `scale(1, ${transformScale})`}"
+      />
     </div>
+  </div>
 </template>
 
 <style lang="scss">
