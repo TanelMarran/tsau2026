@@ -71,6 +71,10 @@ const items: CardTextProps[] = [
     }
 ]
 
+const footerData = {
+    text: 'Selle hüvastijätu on toonud teile Tanel, kes pole enam päris see sama Tanel, kes ta oli 6 aastat tagasi. Lehe arenduseks kulus: 1 nädalavahetus, 1 telefon, 1 temust ostetud telefonistatiiv, 1 energiajook, 1 tobipaus, 2 kätt, 1 pea, 0 Claude tokenit.',
+}
+
 
 </script>
 
@@ -107,40 +111,51 @@ const items: CardTextProps[] = [
                 </TextScrollerItem>
             </template>
         </TextScroller>
-        <Parallaxer class="absolute bottom-16 left-1/12 z-0" :speed=".5" :offset="-100">
+        <Parallaxer class="absolute bottom-16 left-1/12 z-0 pointer-events-none" :speed=".5" :offset="-100">
             <img src="../assets/images/export/tsaukitsau2.png" alt="alt text" width="300px">
         </Parallaxer>
-        <Parallaxer class="absolute right-1/12 top-16 z-0" :speed="-1" :offset="50">
-            <img src="../assets/images/export/tsaukitsau1.png" alt="alt text" width="250px">
-        </Parallaxer>
-        <Parallaxer class="absolute left-3/12 top-16 z-0" :speed="1" :offset="1000">
+        <Parallaxer class="absolute left-3/12 top-16 z-0 pointer-events-none" :speed="1" :offset="1000">
             <img src="../assets/images/export/tsaukitsau3.png" alt="alt text" width="300px">
         </Parallaxer>
-        <Parallaxer class="absolute left-2/12 top-16 z-0" :speed="2" :offset="1200">
+        <Parallaxer class="absolute left-2/12 top-16 z-0 pointer-events-none" :speed="2" :offset="1200">
             <img src="../assets/images/export/tsaukitsau4.png" alt="alt text" width="200px">
         </Parallaxer>
-        <Parallaxer class="absolute right-1/5 top-16 z-0" :speed="-2" :offset="0">
+        <Parallaxer class="absolute right-1/5 top-16 z-0 pointer-events-none" :speed="-2" :offset="0">
             <img src="../assets/images/export/tsaukitsau5.png" alt="alt text" width="500px">
         </Parallaxer>
-        <Parallaxer class="absolute right-1/12 top-16 z-0" :speed="12" :offset="4000">
+        <Parallaxer class="absolute right-1/12 top-16 z-0 pointer-events-none" :speed="12" :offset="4000">
             <img src="../assets/images/export/tsaukitsau6.png" alt="alt text" width="500px">
         </Parallaxer>
-        <Parallaxer class="absolute right-1/12 top-16 z-0" :speed="9" :offset="4000">
+        <Parallaxer class="absolute right-1/12 top-16 z-0 pointer-events-none" :speed="9" :offset="4000">
             <img src="../assets/images/export/tsaukitsau7.png" alt="alt text" width="500px">
         </Parallaxer>
-        <Parallaxer class="absolute right-1/12 top-16 z-0" :speed="-9" :offset="-9000">
+        <Parallaxer class="absolute right-1/12 top-16 z-0 pointer-events-none" :speed="-9" :offset="-9000">
             <img src="../assets/images/export/tsaukitsau8.png" alt="alt text" width="500px">
         </Parallaxer>
-        <Parallaxer class="absolute right-1/12 top-16 z-0" :speed="-12" :offset="-9000">
+        <Parallaxer class="absolute right-1/12 top-16 z-0 pointer-events-none" :speed="-12" :offset="-9000">
             <img src="../assets/images/export/tsaukitsau8.png" alt="alt text" width="500px">
         </Parallaxer>
-        <Parallaxer class="absolute -left-1/12 top-16 z-0" :speed="2" :offset="1500 * 1.3">
+        <Parallaxer class="absolute -left-1/12 top-16 z-0 pointer-events-none" :speed="2" :offset="1500 * 1.4">
             <img src="../assets/images/export/tsaukitsau10.png" alt="alt text" width="800px">
         </Parallaxer>
+        <Parallaxer class="absolute left-0 right-0 bottom-0 z-[-1] -mx-8 pointer-events-none " :speed="2.5" :offset="1700 * 1.8">
+            <div class="index__water"></div>
+            <div class="index__water-background"></div>
+        </Parallaxer>
     </Scroller>
+    <Footer class="zindex-2 relative max-w-[480px] mx-auto" v-bind="footerData"></Footer>
 </template>
 
 <style lang="scss">
+@keyframes slide {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  100% {
+    transform: translate3d(-1920px, 0, 0); /* The image width */
+  }
+}
+
 @keyframes animIndexPop {
     0% {
         transform: scaleX(2);
@@ -164,5 +179,23 @@ const items: CardTextProps[] = [
         background-color: var(--color-red-50);
         line-height: 1;
     }
+}
+
+.index__water {
+    left: 0;
+    width: 1920px * 2;
+    height: 210px;
+
+    background-image: url('../assets/images/export/wave.png'); 
+    background-position: center top;
+    background-repeat: repeat-x;
+
+    animation: slide 8s infinite linear;
+}
+
+.index__water-background {
+    width: 100%;
+    height: 800px;
+    background-color: #0451e0;
 }
 </style>
