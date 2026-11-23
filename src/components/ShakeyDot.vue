@@ -41,8 +41,8 @@ const emit = defineEmits({
 <style lang="scss">
 .shakey-dot {
     position: relative;
-    width: 25px;
-    height: 25px;
+    width: 23px;
+    height: 23px;
     border: 4px solid var(--color-rose-50);
     border-radius: 50%;
 }

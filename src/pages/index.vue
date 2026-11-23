@@ -306,6 +306,28 @@ const scrollerRef = useTemplateRef('scroller')
       >
     </Parallaxer>
     <Parallaxer
+      class="absolute right-1/16 -z-1 -mr-10 top-16 pointer-events-none"
+      :speed="9.0"
+      :offset="3000 * 3.0"
+    >
+      <img
+        src="../assets/images/export/splash1.png"
+        alt="On meeldejääv:)"
+        width="640px"
+      >
+    </Parallaxer>
+    <Parallaxer
+      class="absolute right-1/12 -mr-10 -z-1 top-16 pointer-events-none"
+      :speed="16.0"
+      :offset="5300 * 3.0"
+    >
+      <img
+        src="../assets/images/export/splash2.png"
+        alt="On meeldejääv:)"
+        width="640px"
+      >
+    </Parallaxer>
+    <Parallaxer
       class="absolute -left-1/12 top-16 z-0 pointer-events-none"
       :speed="2"
       :offset="1500 * 1.4"
