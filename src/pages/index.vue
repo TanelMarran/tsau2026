@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, useTemplateRef } from 'vue';
+import { computed, ref, useTemplateRef } from 'vue';
 import { CardTextProps } from '../components/CardText.vue';
 import TextScroller from '../components/TextScroller.vue';
 
@@ -134,12 +134,6 @@ const itemsAlt: CardTextProps[] = [
         body: 'That didn\'t work out,\nbut that\'s okay because his type was\nbald and old anyway.'
     },
     {
-        body: 'I did ask him to leave a message for you though:'
-    },
-    {
-        body: 'Όπως είμαστε εμείς διακριτικές, έτσι πρέπει να \'σαι και εσύ. Άντε γιατί έχω και τα νεύρα μου από οχτώ χρόνων κορίτσι, δέκα χρόνια τώρα.'
-    },
-    {
         body: 'Ok but really, good luck! Stay in touch.'
     },
     {
@@ -151,26 +145,26 @@ const footerData = {
     text: 'Selle hüvastijätu on toonud teile Tanel, kes pole enam päris see sama Tanel, kes ta oli 6 aastat tagasi. Lehe arenduseks kulus: üks nädalavahetus, üks telefon, üks temust ostetud telefonistatiiv, üks energiajook, üks tobipaus, kaks kätt, CC0 litsents ja null Claude tokenit.',
 }
 const footerDataAlt = {
-    text: 'This farewall has been brough to you by Tanel, who isn\'t quite the same Tanel he was 6 years ago. Used in the making of this page: a weekend worth of days, a phone, a TEMU tripod, an energy drink, one cig, two hands, the CC0 liscence and zero Claude tokens.',
+    text: 'This farewall has been brough to you by Tanel, who isn\'t quite the same Tanel he was 6 years ago. Used in the making of this page: a weekend worth of days, a phone, a TEMU tripod, a energy drink, a cig, two hands, the CC0 liscence and zero Claude tokens.',
 }
 
-const isEveridiki = ref<boolean>(false)
+const isNotEvridiki = ref<boolean>(false)
 
 const scrollerRef = useTemplateRef('scroller')
 
 </script>
 
 <template>
-  <LanguagePicker v-model="isEveridiki" class="z-5 relative"></LanguagePicker>
+  <LanguagePicker v-model="isNotEvridiki" class="z-5 relative"></LanguagePicker>
   <Scroller
     class="px-8"
     ref="scroller"
     :height="2400 * 5"
   >
     <TextScroller
-      class="index__text-scroller max-w-160 z-10"
+      class="index__text-scroller max-w-160 z-10 top-0"
       :visibility-range="6"
-      :items="isEveridiki ? items : itemsAlt"
+      :items="isNotEvridiki ? items : itemsAlt"
     >
       <template #item="{ open, dotScrollProgress, isScrolledPast, visible, index, ...props }">
         <TextScrollerItem
@@ -178,7 +172,7 @@ const scrollerRef = useTemplateRef('scroller')
           class="index__scroller-item"
           :class="{
             'index__scroller-item--current': open,
-            'index__scroller-item--minimized': isScrolledPast
+            'index__scroller-item--minimized index__hide-mobile': isScrolledPast,
           }"
           :is-open="open"
         >
@@ -190,7 +184,7 @@ const scrollerRef = useTemplateRef('scroller')
           </template>
           <template #closed>
             <ShakeyDot
-              @click="() => scrollerRef?.scrollToProgress(index / ((isEveridiki ? items : itemsAlt).length))"
+              @click="() => scrollerRef?.scrollToProgress(index / ((isNotEvridiki ? items : itemsAlt).length))"
               :fill-amount="(dotScrollProgress)"
             />
           </template>
@@ -198,7 +192,7 @@ const scrollerRef = useTemplateRef('scroller')
       </template>
     </TextScroller>
     <Parallaxer
-      class="absolute bottom-16 right-0 z-0 pointer-events-none"
+      class="index__hide-mobile absolute bottom-16 right-0 z-0 pointer-events-none"
       :speed="3"
       :offset="1300"
     >
@@ -209,7 +203,7 @@ const scrollerRef = useTemplateRef('scroller')
       >
     </Parallaxer>
     <Parallaxer
-      class="absolute bottom-0 left-1/2 z-0 pointer-events-none"
+      class="index__hide-mobile absolute bottom-0 left-1/2 z-0 pointer-events-none"
       :speed="2.1"
       :offset="1500"
     >
@@ -221,7 +215,7 @@ const scrollerRef = useTemplateRef('scroller')
       >
     </Parallaxer>
     <Parallaxer
-      class="absolute bottom-16 right-1/12 z-0 pointer-events-none"
+      class="index__hide-mobile absolute bottom-16 right-1/12 z-0 pointer-events-none"
       :speed="3"
       :offset="-100"
     >
@@ -236,7 +230,7 @@ const scrollerRef = useTemplateRef('scroller')
       </Parallaxer>
     </Parallaxer>
     <Parallaxer
-      class="absolute bottom-16 left-1/12 z-0 pointer-events-none"
+      class="index__hide-mobile absolute bottom-16 left-1/12 z-0 pointer-events-none"
       :speed="1"
       :offset="-100"
     >
@@ -247,7 +241,7 @@ const scrollerRef = useTemplateRef('scroller')
       >
     </Parallaxer>
     <Parallaxer
-      class="absolute left-1/12 top-16 z-0 pointer-events-none"
+      class="index__hide-mobile absolute left-1/12 top-16 z-0 pointer-events-none"
       :speed="1"
       :offset="1000"
     >
@@ -258,7 +252,7 @@ const scrollerRef = useTemplateRef('scroller')
       >
     </Parallaxer>
     <Parallaxer
-      class="absolute right-1/12 top-16 z-0 -scale-x-100 pointer-events-none"
+      class="index__hide-mobile absolute right-1/12 top-16 z-0 -scale-x-100 pointer-events-none"
       :speed="3.5"
       :offset="2300"
     >
@@ -269,7 +263,7 @@ const scrollerRef = useTemplateRef('scroller')
       >
     </Parallaxer>
     <Parallaxer
-      class="absolute right-1/5 top-16 z-0 pointer-events-none"
+      class="index__hide-mobile absolute right-1/5 top-16 z-0 pointer-events-none"
       :speed="-2"
       :offset="0"
     >
@@ -280,7 +274,7 @@ const scrollerRef = useTemplateRef('scroller')
       >
     </Parallaxer>
     <Parallaxer
-      class="absolute right-1/12 top-16 z-0 pointer-events-none"
+      class="index__hide-mobile absolute right-1/12 top-16 z-0 pointer-events-none"
       :speed="12"
       :offset="4000"
     >
@@ -291,7 +285,7 @@ const scrollerRef = useTemplateRef('scroller')
       >
     </Parallaxer>
     <Parallaxer
-      class="absolute right-1/12 top-16 z-0 pointer-events-none"
+      class="index__hide-mobile absolute right-1/12 top-16 z-0 pointer-events-none"
       :speed="9"
       :offset="4000"
     >
@@ -302,7 +296,7 @@ const scrollerRef = useTemplateRef('scroller')
       >
     </Parallaxer>
     <Parallaxer
-      class="absolute right-1/12 top-16 z-0 pointer-events-none"
+      class="index__hide-mobile absolute right-1/12 top-16 z-0 pointer-events-none"
       :speed="-9"
       :offset="-9000"
     >
@@ -313,7 +307,7 @@ const scrollerRef = useTemplateRef('scroller')
       >
     </Parallaxer>
     <Parallaxer
-      class="absolute right-1/16 -z-1 -mr-10 top-16 pointer-events-none"
+      class="index__hide-mobile absolute right-1/16 -z-1 -mr-10 top-16 pointer-events-none"
       :speed="9.0"
       :offset="3000 * 3.0"
     >
@@ -324,7 +318,7 @@ const scrollerRef = useTemplateRef('scroller')
       >
     </Parallaxer>
     <Parallaxer
-      class="absolute right-1/12 -mr-10 -z-1 top-16 pointer-events-none"
+      class="index__hide-mobile absolute right-1/12 -mr-10 -z-1 top-16 pointer-events-none"
       :speed="16.0"
       :offset="5300 * 3.0"
     >
@@ -335,7 +329,7 @@ const scrollerRef = useTemplateRef('scroller')
       >
     </Parallaxer>
     <Parallaxer
-      class="absolute -left-1/12 top-16 z-0 pointer-events-none"
+      class="index__hide-mobile absolute -left-1/12 top-16 z-0 pointer-events-none"
       :speed="2"
       :offset="1500 * 1.4"
     >
@@ -358,7 +352,7 @@ const scrollerRef = useTemplateRef('scroller')
   </Scroller>
   <Footer
     class="zindex-2 relative max-w-[480px] mx-auto"
-    v-bind="isEveridiki ? footerData : footerDataAlt"
+    v-bind="isNotEvridiki ? footerData : footerDataAlt"
   />
 </template>
 
@@ -425,5 +419,11 @@ const scrollerRef = useTemplateRef('scroller')
   color: white;
   text-transform: uppercase;
   font-size: 14px;
+}
+
+.index__hide-mobile {
+  @media screen and (max-width: 1200px) {
+    display: none;
+  }
 }
 </style>

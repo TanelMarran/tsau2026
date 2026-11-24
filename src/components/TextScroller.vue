@@ -50,7 +50,7 @@ defineExpose({
 </script>
 
 <template>
-  <div class="text-scroller">
+  <div class="text-scroller py-32">
     <template
       v-for="(item, index) in props.items"
       :key="index"
