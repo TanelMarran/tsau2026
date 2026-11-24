@@ -25,7 +25,7 @@ const playSound = () => {
         <button :class="{ 'is-current': !modelValue}" @click="modelValue = false">Evridiki</button>
       </li>
       <li>
-        <button :class="{ 'is-current': !modelValue}" @click="playSound()">Juku</button>
+        <button @click="playSound()">Juku</button>
         <audio :src="ughAudio" ref="audio-player"></audio>
       </li>
     </ul>
