@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, ref, useTemplateRef } from 'vue';
+import { ref, useTemplateRef } from 'vue';
 import { CardTextProps } from '../components/CardText.vue';
 import TextScroller from '../components/TextScroller.vue';
 
@@ -134,6 +134,12 @@ const itemsAlt: CardTextProps[] = [
         body: 'That didn\'t work out,\nbut that\'s okay because his type was\nbald and old anyway.'
     },
     {
+        body: 'I did ask him to leave a message for you though:'
+    },
+    {
+        body: 'Όπως είμαστε εμείς διακριτικές, έτσι πρέπει να \'σαι και εσύ. Άντε γιατί έχω και τα νεύρα μου από οχτώ χρόνων κορίτσι, δέκα χρόνια τώρα.'
+    },
+    {
         body: 'Ok but really, good luck! Stay in touch.'
     },
     {
@@ -145,7 +151,7 @@ const footerData = {
     text: 'Selle hüvastijätu on toonud teile Tanel, kes pole enam päris see sama Tanel, kes ta oli 6 aastat tagasi. Lehe arenduseks kulus: üks nädalavahetus, üks telefon, üks temust ostetud telefonistatiiv, üks energiajook, üks tobipaus, kaks kätt, CC0 litsents ja null Claude tokenit.',
 }
 const footerDataAlt = {
-    text: 'This farewall has been brough to you by Tanel, who isn\'t quite the same Tanel he was 6 years ago. Used in the making of this page: a weekend worth of days, a phone, a TEMU tripod, a energy drink, a cig, two hands, the CC0 liscence and zero Claude tokens.',
+    text: 'This farewall has been brough to you by Tanel, who isn\'t quite the same Tanel he was 6 years ago. Used in the making of this page: a weekend worth of days, a phone, a TEMU tripod, an energy drink, one cig, two hands, the CC0 liscence and zero Claude tokens.',
 }
 
 const isEveridiki = ref<boolean>(false)
@@ -163,11 +169,12 @@ const scrollerRef = useTemplateRef('scroller')
   >
     <TextScroller
       class="index__text-scroller max-w-160 z-10"
-      :visibility-range="4"
+      :visibility-range="6"
       :items="isEveridiki ? items : itemsAlt"
     >
-      <template #item="{ open, dotScrollProgress, isScrolledPast, index, ...props }">
+      <template #item="{ open, dotScrollProgress, isScrolledPast, visible, index, ...props }">
         <TextScrollerItem
+          v-show="visible"
           class="index__scroller-item"
           :class="{
             'index__scroller-item--current': open,
