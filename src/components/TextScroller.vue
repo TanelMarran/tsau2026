@@ -50,12 +50,12 @@ defineExpose({
 </script>
 
 <template>
-  <div class="text-scroller py-32">
+  <div class="text-scroller py-32 bg-radial">
     <template
       v-for="(item, index) in props.items"
       :key="index"
     >
-      <slot 
+      <slot
         name="item"
         v-bind="item"
         :visible="Math.abs(index - currentOpenIndex) < props.visibilityRange"
@@ -70,8 +70,20 @@ defineExpose({
 
 <style lang="scss">
 .text-scroller {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 960px;
+    height: 960px;
+    background: radial-gradient(circle at center, #0e33da 10%, #0e33da00 50%);
+  }
 }
 </style>

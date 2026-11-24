@@ -10,16 +10,17 @@ const props = withDefaults(defineProps<{
 
 <template>
   <footer
-    class="footer flex justify-center py-4"
+    class="footer flex justify-center py-4 w-full"
     text="text"
   >
-    <div class="flex flex-col w-full text-sm ">
+    <div class="flex flex-col w-full text-sm max-w-[480px]">
       <p
         v-if="text"
         class="text-center whitespace-pre-wrap"
         :style="{ 'line-height': 1.05, opacity: .8 }"
       >
         {{ props.text }}
+        <a class="underline hover:no-underline" href="https://github.com/TanelMarran/tsau2026" target="_blank">Github</a>.
       </p>
       <ul
         v-if="props.items"
@@ -35,3 +36,9 @@ const props = withDefaults(defineProps<{
     </div>
   </footer>
 </template>
+
+<style lang="scss">
+.footer {
+  background: #0451e0;
+}
+</style>

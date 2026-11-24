@@ -4,14 +4,14 @@ const modelValue = defineModel<boolean>({default: false})
 </script>
 
 <template>
-  <div class="language-picker max-w-50 text-right">
+  <div class="language-picker max-w-50 text-right p-4">
     <div>Language picker:</div>
     <ul>
       <li>
-        <button @click="modelValue = true">Eesti keel</button>
+        <button :class="{ 'is-current': modelValue}" @click="modelValue = true">Eesti keel</button>
       </li>
       <li>
-        <button @click="modelValue = false">Evridiki</button>
+        <button :class="{ 'is-current': !modelValue}" @click="modelValue = false">Evridiki</button>
       </li>
     </ul>
   </div>
@@ -19,21 +19,22 @@ const modelValue = defineModel<boolean>({default: false})
 
 <style lang="scss" scoped>
 button {
-    border: 1px solid darkblue;
-    padding: 0 8px;
-    background: gray;
     cursor: pointer;
     animation: alert 1s infinite;
     animation-timing-function: step-start;
+    text-decoration: underline;
 
     &:hover {
         animation: none;
-        background: darkgray;
+        text-decoration: none;
     }
 
     &:active {
         animation: none;
-        background: rgb(131, 131, 131);
     }
+
+  &.is-current {
+    text-decoration: none;
+  }
 }
 </style>

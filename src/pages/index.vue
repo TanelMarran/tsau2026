@@ -73,7 +73,7 @@ const items: CardTextProps[] = [
 ]
 const itemsAlt: CardTextProps[] = [
     {
-        title: 'Hey!',
+        title: 'Heips Evridiki!',
         body: 'I wanted to let you know that\nmy final day at gotoAndPlay will be 19.12.2026.'
     },
     {
@@ -155,14 +155,13 @@ const scrollerRef = useTemplateRef('scroller')
 </script>
 
 <template>
-  <LanguagePicker v-model="isNotEvridiki" class="z-5 relative"></LanguagePicker>
+  <LanguagePicker v-model="isNotEvridiki" class="z-5 relative ml-auto"></LanguagePicker>
   <Scroller
-    class="px-8"
     ref="scroller"
     :height="2400 * 5"
   >
     <TextScroller
-      class="index__text-scroller max-w-160 z-10 top-0"
+      class="index__text-scroller max-w-160 z-10 top-0 py-8"
       :visibility-range="6"
       :items="isNotEvridiki ? items : itemsAlt"
     >
@@ -172,7 +171,7 @@ const scrollerRef = useTemplateRef('scroller')
           class="index__scroller-item"
           :class="{
             'index__scroller-item--current': open,
-            'index__scroller-item--minimized index__hide-mobile': isScrolledPast,
+            'index__scroller-item--minimized': isScrolledPast,
           }"
           :is-open="open"
         >
@@ -203,7 +202,7 @@ const scrollerRef = useTemplateRef('scroller')
       >
     </Parallaxer>
     <Parallaxer
-      class="index__hide-mobile absolute bottom-0 left-1/2 z-0 pointer-events-none"
+      class="absolute bottom-0 left-1/2 z-0 pointer-events-none"
       :speed="2.1"
       :offset="1500"
     >
@@ -215,7 +214,7 @@ const scrollerRef = useTemplateRef('scroller')
       >
     </Parallaxer>
     <Parallaxer
-      class="index__hide-mobile absolute bottom-16 right-1/12 z-0 pointer-events-none"
+      class="absolute bottom-16 right-1/12 z-0 pointer-events-none"
       :speed="3"
       :offset="-100"
     >
@@ -274,7 +273,7 @@ const scrollerRef = useTemplateRef('scroller')
       >
     </Parallaxer>
     <Parallaxer
-      class="index__hide-mobile absolute right-1/12 top-16 z-0 pointer-events-none"
+      class="absolute right-1/12 top-16 z-0 pointer-events-none"
       :speed="12"
       :offset="4000"
     >
@@ -285,7 +284,7 @@ const scrollerRef = useTemplateRef('scroller')
       >
     </Parallaxer>
     <Parallaxer
-      class="index__hide-mobile absolute right-1/12 top-16 z-0 pointer-events-none"
+      class="absolute right-1/12 top-16 z-0 pointer-events-none"
       :speed="9"
       :offset="4000"
     >
@@ -296,7 +295,7 @@ const scrollerRef = useTemplateRef('scroller')
       >
     </Parallaxer>
     <Parallaxer
-      class="index__hide-mobile absolute right-1/12 top-16 z-0 pointer-events-none"
+      class="absolute right-1/12 top-16 z-0 pointer-events-none"
       :speed="-9"
       :offset="-9000"
     >
@@ -307,7 +306,7 @@ const scrollerRef = useTemplateRef('scroller')
       >
     </Parallaxer>
     <Parallaxer
-      class="index__hide-mobile absolute right-1/16 -z-1 -mr-10 top-16 pointer-events-none"
+      class="absolute right-1/16 -z-1 -mr-10 top-16 pointer-events-none"
       :speed="9.0"
       :offset="3000 * 3.0"
     >
@@ -318,7 +317,7 @@ const scrollerRef = useTemplateRef('scroller')
       >
     </Parallaxer>
     <Parallaxer
-      class="index__hide-mobile absolute right-1/12 -mr-10 -z-1 top-16 pointer-events-none"
+      class="absolute right-1/12 -mr-10 -z-1 top-16 pointer-events-none"
       :speed="16.0"
       :offset="5300 * 3.0"
     >
@@ -351,7 +350,7 @@ const scrollerRef = useTemplateRef('scroller')
     </Parallaxer>
   </Scroller>
   <Footer
-    class="zindex-2 relative max-w-[480px] mx-auto"
+    class="zindex-2 relative"
     v-bind="isNotEvridiki ? footerData : footerDataAlt"
   />
 </template>
@@ -423,6 +422,12 @@ const scrollerRef = useTemplateRef('scroller')
 
 .index__hide-mobile {
   @media screen and (max-width: 1200px) {
+    display: none;
+  }
+}
+
+.index__hide-desktop {
+  @media screen and (min-width: 1200px) {
     display: none;
   }
 }
