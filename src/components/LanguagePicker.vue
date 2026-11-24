@@ -13,7 +13,7 @@ const modelValue = defineModel<boolean>({default: false})
             We have some concerning news for you.
         </template>
         <template v-else>
-            <div>Pole everidiki?</div>
+            <div>Pole Evridiki?</div>
             Mis sa siin teed!?
         </template>
         <button class="mt-3" @click="modelValue = !modelValue">{{ modelValue ? 'CLICK HERE!' : 'MINE TAGASI' }}</button>
