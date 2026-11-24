@@ -268,7 +268,7 @@ const scrollerRef = useTemplateRef('scroller')
       >
     </Parallaxer>
     <Parallaxer
-      class="index__hide-mobile absolute right-1/5 top-16 z-0 pointer-events-none"
+      class="absolute right-1/5 top-16 z-0 pointer-events-none"
       :speed="-2"
       :offset="0"
     >
