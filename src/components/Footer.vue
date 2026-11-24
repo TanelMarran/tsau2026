@@ -40,5 +40,10 @@ const props = withDefaults(defineProps<{
 <style lang="scss">
 .footer {
   background: #0451e0;
+
+  @media screen and (min-width: 1200px) {
+    margin-top: -90px;
+    background: transparent;
+  }
 }
 </style>
