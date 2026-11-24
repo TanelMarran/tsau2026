@@ -1,6 +1,17 @@
 <script lang="ts" setup>
+import ughAudio from '../assets/ugh.m4a';
+import {useTemplateRef} from 'vue';
 
 const modelValue = defineModel<boolean>({default: false})
+
+const audioRef = useTemplateRef<HTMLAudioElement>('audio-player')
+
+const playSound = () => {
+  if (audioRef.value) {
+    audioRef.value.play()
+  }
+}
+
 </script>
 
 <template>
@@ -12,6 +23,10 @@ const modelValue = defineModel<boolean>({default: false})
       </li>
       <li>
         <button :class="{ 'is-current': !modelValue}" @click="modelValue = false">Evridiki</button>
+      </li>
+      <li>
+        <button :class="{ 'is-current': !modelValue}" @click="playSound()">Juku</button>
+        <audio :src="ughAudio" ref="audio-player"></audio>
       </li>
     </ul>
   </div>

@@ -134,7 +134,13 @@ const itemsAlt: CardTextProps[] = [
         body: 'That didn\'t work out,\nbut that\'s okay because his type was\nbald and old anyway.'
     },
     {
-        body: 'Ok but really, good luck! Stay in touch.'
+        body: 'I did ask him to leave you a message however:'
+    },
+    {
+        body: '"Όπως είμαστε εμείς διακριτικές, έτσι πρέπει να \'σαι και εσύ. Άντε γιατί έχω και τα νεύρα μου από οχτώ χρόνων κορίτσι, δέκα χρόνια τώρα."'
+    },
+    {
+        body: 'Good luck! Let\'s not be strangers, ok?'
     },
     {
         body: 'I\'m gonna go look for some dreams now.'
@@ -148,7 +154,7 @@ const footerDataAlt = {
     text: 'This farewall has been brough to you by Tanel, who isn\'t quite the same Tanel he was 6 years ago. Used in the making of this page: a weekend worth of days, a phone, a TEMU tripod, a energy drink, a cig, two hands, the CC0 liscence and zero Claude tokens.',
 }
 
-const isNotEvridiki = ref<boolean>(false)
+const isNotEvridiki = ref<boolean>(true)
 
 const scrollerRef = useTemplateRef('scroller')
 
